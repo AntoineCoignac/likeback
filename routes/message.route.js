@@ -1,17 +1,13 @@
 const express = require('express');
-const { verifyToken } = require('../middleware/jwt.js');
-const {
-  createMessage,
-  getMessages,
-  getConversations
-} = require('../controllers/message.controller.js');
+const verifyToken = require('../middleware/jwt.js');
+const messageController = require('../controllers/message.controller.js');
 
 
 const router = express.Router();
 
-router.get("/messages/:id", verifyToken, getMessages);
-router.get("/conversations", verifyToken, getConversations);
-router.post("/", verifyToken, createMessage);
+router.get("/messages/:id", verifyToken, messageController.getMessages);
+router.get("/conversations", verifyToken, messageController.getConversations);
+router.post("/", verifyToken, messageController.createMessage);
 
 
-export default router;
+module.exports = router;

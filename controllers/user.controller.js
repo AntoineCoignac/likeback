@@ -1,10 +1,10 @@
 const User = require("../models/user.model.js");
 const createError = require("../utils/createError.js");
 
-export const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res, next) => {
   try {
     
-    const user = await user.findById(req.params.id);
+    const user = await User.findById(req.params.id);
 
     if (req.userId !== user._id.toString()) {
       return next(createError(403, "You can delete only your account!"));
@@ -17,7 +17,7 @@ export const deleteUser = async (req, res, next) => {
   }
 };
 
-export const getUser = async (req, res, next) => {
+const getUser = async (req, res, next) => {
   try {
     
     const user = await User.findById(req.params.id);
@@ -27,7 +27,7 @@ export const getUser = async (req, res, next) => {
   }
 };
 
-export const updateUser = async (req, res, next) => {
+const updateUser = async (req, res, next) => {
   try {
     
     const user = await User.findById(req.params.id);
@@ -58,7 +58,7 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
-export const getUsers = async (req, res, next) => {
+const getUsers = async (req, res, next) => {
   try {
     
     const searchValue = req.query.search;
@@ -105,4 +105,11 @@ export const getUsers = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+module.exports = {
+  deleteUser,
+  getUser,
+  updateUser,
+  getUsers,
 };

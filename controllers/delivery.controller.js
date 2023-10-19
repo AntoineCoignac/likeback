@@ -2,7 +2,7 @@ const createError = require("../utils/createError.js");
 const Delivery = require("../models/delivery.model.js");
 const Order = require("../models/order.model.js");
 
-export const createDelivery = async (req, res, next) => {
+const createDelivery = async (req, res, next) => {
   const { orderId, docs } = req.body;
 
   try {
@@ -104,7 +104,7 @@ export const createDelivery = async (req, res, next) => {
   }
 };
 
-export const getDeliveriesByOrder = async (req, res, next) => {
+const getDeliveriesByOrder = async (req, res, next) => {
   const { orderId } = req.params;
 
   try {
@@ -137,7 +137,7 @@ export const getDeliveriesByOrder = async (req, res, next) => {
   }
 };
 
-export const acceptOrRejectDelivery = async (req, res, next) => {
+const acceptOrRejectDelivery = async (req, res, next) => {
   const { deliveryId } = req.params;
   const { validation, feedback } = req.body;
   console.log(validation);
@@ -190,4 +190,10 @@ export const acceptOrRejectDelivery = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+module.exports = {
+  createDelivery,
+  getDeliveriesByOrder,
+  acceptOrRejectDelivery,
 };

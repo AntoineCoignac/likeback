@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const { verifyToken } = require('../middleware/jwt.js');
 const {
   createNotification,
@@ -13,4 +13,4 @@ router.post("/", verifyToken, createNotification);
 router.get("/", verifyToken, getNotifications);
 router.put("/:notificationId", verifyToken, updateNotification);
 
-export default router;
+module.exports = router;*/

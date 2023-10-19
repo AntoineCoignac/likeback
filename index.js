@@ -5,7 +5,17 @@ const crypto = require('crypto');
 const pkg = require('./package.json');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+
+
+const authRoute = require("./routes/auth.route.js");
+const userRoute = require("./routes/user.route.js");
+const gigRoute = require("./routes/gig.route.js");
+const messageRoute = require("./routes/message.route.js");
+const orderRoute = require("./routes/order.route.js");
+const deliveryRoute = require("./routes/delivery.route.js");
+
+
 
 // App constants
 const port = process.env.PORT || 3000;

@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require('express-validator');
 
-export const register = async (req, res, next) => {
+const register = async (req, res, next) => {
   
   // Validez les champs du formulaire (vous pouvez utiliser express-validator)
   const errors = validationResult(req);
@@ -48,7 +48,7 @@ function isValidPassword(password) {
   return passwordRegex.test(password);
 }
 
-export const login = async (req, res, next) => {
+const login = async (req, res, next) => {
   try {
     
     const user = await User.findOne({ username: req.body.username });
@@ -79,7 +79,7 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const logout = async (req, res) => {
+const logout = async (req, res) => {
   
   res
     .clearCookie("accessToken", {
@@ -88,4 +88,10 @@ export const logout = async (req, res) => {
     })
     .status(200)
     .send("User has been logged out.");
+};
+
+module.exports = {
+  register,
+  login,
+  logout,
 };

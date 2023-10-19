@@ -1,21 +1,17 @@
 const express = require('express');
-const {
-  createDelivery,
-  getDeliveriesByOrder,
-  acceptOrRejectDelivery
-} = require('../controllers/delivery.controller.js');
-const { verifyToken } = require('../middleware/jwt.js');
+const deliveryController = require('../controllers/delivery.controller.js');
+const verifyToken = require('../middleware/jwt.js');
 
 
 const router = express.Router();
 
 // Route pour créer une livraison
-router.post('/create', verifyToken, createDelivery);
+router.post('/create', verifyToken, deliveryController.createDelivery);
 
 // Route pour obtenir toutes les livraisons associées à une commande
-router.get('/order/:orderId', verifyToken, getDeliveriesByOrder);
+router.get('/order/:orderId', verifyToken, deliveryController.getDeliveriesByOrder);
 
 // Route pour accepter ou refuser une livraison
-router.patch('/:deliveryId', verifyToken, acceptOrRejectDelivery);
+router.patch('/:deliveryId', verifyToken, deliveryController.acceptOrRejectDelivery);
 
-export default router;
+module.exports = router;

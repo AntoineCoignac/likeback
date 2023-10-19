@@ -25,4 +25,4 @@ const DeliverySchema = new Schema({
     timestamps:true
 });
 
-export default mongoose.model("Delivery", DeliverySchema)
+module.exports = mongoose.model("Delivery", DeliverySchema)

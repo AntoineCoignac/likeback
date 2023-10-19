@@ -1,7 +1,7 @@
 const Notification = require("../models/notification.model.js");
 const createError = require("../utils/createError.js");
-
-export const createNotification = async (req, res, next) => {
+/*
+const createNotification = async (req, res, next) => {
   const { userId, isBrand, type, senderId, text } = req.body;
 
   try {
@@ -22,7 +22,7 @@ export const createNotification = async (req, res, next) => {
   }
 };
 
-export const getNotifications = async (req, res, next) => {
+const getNotifications = async (req, res, next) => {
 
   const { userId } = req;
 
@@ -35,7 +35,7 @@ export const getNotifications = async (req, res, next) => {
   }
 };
 
-export const updateNotification = async (req, res, next) => {
+const updateNotification = async (req, res, next) => {
   const { notificationId } = req.params;
 
   try {
@@ -57,3 +57,5 @@ export const updateNotification = async (req, res, next) => {
     next(err);
   }
 };
+*/
+

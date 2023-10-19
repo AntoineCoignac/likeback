@@ -5,7 +5,7 @@ const Stripe = require("stripe");
 const moment = require("moment");
 const User = require("../models/user.model.js");
 
-export const intent = async (req, res, next) => {
+const intent = async (req, res, next) => {
   try {
     
     const stripe = new Stripe(
@@ -45,7 +45,7 @@ export const intent = async (req, res, next) => {
   
 }
 
-export const getOrders = async (req, res, next) => {
+const getOrders = async (req, res, next) => {
   try {
     
     // Utilisez req.userId pour récupérer les commandes pour l'utilisateur connecté
@@ -63,7 +63,7 @@ export const getOrders = async (req, res, next) => {
 };
 
 
-export const likeOrder = async (req, res, next) => {
+const likeOrder = async (req, res, next) => {
   const { orderId } = req.params;
 
   try {
@@ -124,7 +124,7 @@ export const likeOrder = async (req, res, next) => {
 };
 
 
-export const confirm = async (req, res, next) => {
+const confirm = async (req, res, next) => {
   try {
     
     const order = await Order.findOne({
@@ -156,7 +156,7 @@ export const confirm = async (req, res, next) => {
 }
 
 // Route pour récupérer une seule commande par son ID
-export const getOrderById = async (req, res, next) => {
+const getOrderById = async (req, res, next) => {
   try {
     
     const orderId = req.params.id;
@@ -179,7 +179,7 @@ export const getOrderById = async (req, res, next) => {
 };
 
 
-export const accept = async (req, res, next) => {
+const accept = async (req, res, next) => {
   try {
     
     const orderId = req.params.id;
@@ -205,5 +205,15 @@ export const accept = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+
+module.exports = {
+  intent,
+  getOrders,
+  likeOrder,
+  confirm,
+  getOrderById,
+  accept,
 };
 

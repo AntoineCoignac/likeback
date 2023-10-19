@@ -2,7 +2,7 @@ const Message = require("../models/message.model.js");
 const createError = require("../utils/createError.js");
 
 // controllers/message.controller.js
-export const createMessage = async (req, res, next) => {
+const createMessage = async (req, res, next) => {
   const { receiverId, text } = req.body;
 
   try {
@@ -25,7 +25,7 @@ export const createMessage = async (req, res, next) => {
 };
 
 // controllers/message.controller.js
-export const getMessages = async (req, res, next) => {
+const getMessages = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -45,7 +45,7 @@ export const getMessages = async (req, res, next) => {
 };
 
 
-export const getConversations = async (req, res, next) => {
+const getConversations = async (req, res, next) => {
   try {
     
     // Récupérer les derniers messages de chaque conversation de l'utilisateur connecté
@@ -88,3 +88,10 @@ export const getConversations = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports = {
+  createMessage,
+  getMessages,
+  getConversations
+};
+

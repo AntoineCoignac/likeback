@@ -1,18 +1,12 @@
 const express = require('express');
-const {
-  deleteUser,
-  getUser,
-  updateUser,
-  getUsers
-} = require('../controllers/user.controller.js');
-const { verifyToken } = require('../middleware/jwt.js');
-
+const userController = require('../controllers/user.controller.js');
+const verifyToken = require('../middleware/jwt.js');
 
 const router = express.Router();
 
-router.delete("/:id",verifyToken, deleteUser);
-router.get("/search-users/", getUsers);
-router.get("/:id", getUser);
-router.put("/:id",verifyToken, updateUser);
+router.get("/search-users/", userController.getUsers);
+router.get("/:id", userController.getUser);
+router.put("/:id",verifyToken, userController.updateUser);
+router.delete("/:id", verifyToken, userController.deleteUser);
 
-export default router;
+module.exports = router;
