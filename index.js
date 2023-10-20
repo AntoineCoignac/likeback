@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
-const crypto = require('crypto');
-const pkg = require('./package.json');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -18,7 +16,7 @@ const deliveryRoute = require("./routes/delivery.route.js");
 
 
 // App constants
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
   
 // Create the Express app & setup middlewares
 const app = express();
@@ -48,7 +46,7 @@ app.get('/', function (req, res) {
     return res.send("Welcome to the Like API");
 })
 
-app.use("/api/auth", authRoute);
+//app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/gigs", gigRoute);
 app.use("/api/messages", messageRoute);
