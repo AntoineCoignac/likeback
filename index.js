@@ -22,7 +22,13 @@ const port = process.env.PORT || 8080;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
+app.use(cors({
+    origin: [
+      /http:\/\/(127(\.\d){3}|localhost)/,
+      'https://soft-profiterole-ae906c.netlify.app' // Ajoutez votre URL Netlify ici
+    ]
+  })
+);
 app.options('*', cors());
 app.use(express.json());
 app.use(cookieParser());
