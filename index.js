@@ -26,7 +26,7 @@ app.use(cors({
     origin: [
       /http:\/\/(127(\.\d){3}|localhost)/,
       'https://soft-profiterole-ae906c.netlify.app' // Ajoutez votre URL Netlify ici
-    ]
+    ], credentials: true
   })
 );
 app.options('*', cors());
