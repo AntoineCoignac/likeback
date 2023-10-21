@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
     return res.send("Welcome to the Like API");
 })
 
-//app.use("/api/auth", authRoute);
+app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/gigs", gigRoute);
 app.use("/api/messages", messageRoute);
