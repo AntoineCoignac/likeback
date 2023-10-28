@@ -76,6 +76,10 @@ const UserSchema = new Schema({
         type: String,
         required: false,
     },
+    linkedin: {
+        type: String,
+        required: false,
+    },
     sub: {
         type: Number,
         required:false,
