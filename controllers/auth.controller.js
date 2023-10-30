@@ -3,6 +3,22 @@ const createError = require("../utils/createError.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require('express-validator');
+const nodemailer = require('nodemailer');
+
+const noReply = "noreply@like.cr";
+
+const transporter = nodemailer.createTransport({
+  host : "smtp-mail.outlook.com",
+  secureConnection: true,
+  port : 587,
+  tls: {
+    ciphers: "SSLv3"
+  },
+  auth: {
+    user : noReply,
+    pass: process.env.MAIL
+  }
+})
 
 const register = async (req, res, next) => {
   
@@ -68,6 +84,35 @@ const login = async (req, res, next) => {
     );
 
     const { password, ...info } = user._doc;
+
+    const mailOptions = {
+      from: noReply,
+      to: info.email,
+      subject: "Connexion au compte",
+      html : `<table style="width: 100%; background-color: #f5f5f5; padding: 20px;">
+                <tr>
+                    <td>
+                        <img src="https://like.cr/img/likelogo.png" alt="Like logo." style="margin: 0 auto 20px;" width="60" height="38">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #ffffff; padding: 20px; border: 1px solid #A7A7A7;">
+                        <p>Bonjour ${info.name},</p>
+                        <p>Quelqu'un vient de se connecter à votre compte. Si ce n'est pas vous, veuillez modifier votre mot de passe.</p>
+                        <a href="https://app.like.cr" style="background-color: #D91A3D; color: #ffffff; text-decoration: none; padding: 10px 20px; margin-top: 14px; border-radius: 3px; display: block;">Modifier le mot de passe</a>
+                    </td>
+                </tr>
+            </table>`
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log("E-mail envoyé "+ info.response)
+      }
+    })
+
     res
       .cookie("accessToken", token, {
         httpOnly: true,
