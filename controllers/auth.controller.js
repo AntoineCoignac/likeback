@@ -13,8 +13,8 @@ const transporter = nodemailer.createTransport({
   host : "smtp-mail.outlook.com",
   secure: true,
   port : 587,
-  tls: {
-    ciphers: "SSLv3"
+  tls:{
+    rejectUnauthorized: false
   },
   auth: {
     user : noReply,
