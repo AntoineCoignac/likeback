@@ -10,17 +10,15 @@ dotenv.config();
 const noReply = "noreply@like.cr";
 
 const transporter = nodemailer.createTransport({
-  host : "smtp-mail.outlook.com",
-  service: 'outlook',
-  secureConnection: false,
-  port : 587,
+  host : "smtp.office365.com'",
+  secure: true,
+  port : 465,
   auth: {
     user : noReply,
     pass: process.env.MAIL
   },
   tls: {
     ciphers:'SSLv3',
-    rejectUnauthorized: false,
   }
 })
 
