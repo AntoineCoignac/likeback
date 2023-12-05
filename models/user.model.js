@@ -96,6 +96,10 @@ const UserSchema = new Schema({
         type: Number,
         default: 0,
     },
+    contract: {
+        type: String,
+        required: false,
+    },
     isBanned: {
         type: Boolean,
         default: false,

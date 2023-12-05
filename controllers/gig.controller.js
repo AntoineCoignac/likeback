@@ -92,7 +92,7 @@ const getGigs = async (req, res, next) => {
     ...(q.userId && { userId: q.userId }),
     ...(q.tag && { tag: q.tag }),
     ...((q.min || q.max) && {
-      price: { ...(q.min && { $gt: q.min }), ...(q.max && { $lt: q.max }) },
+      price: { ...(q.min && { $gte: q.min }), ...(q.max && { $lte: q.max }) },
     }),
     ...(q.search && {
       $or: [

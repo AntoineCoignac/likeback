@@ -7,8 +7,6 @@ const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const noReply = "noreply@like.cr";
-
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
@@ -16,7 +14,6 @@ const transporter = nodemailer.createTransport({
   auth: {
       user: 'noreplike@gmail.com',
       pass: process.env.MAIL
-
   }
 })
 
