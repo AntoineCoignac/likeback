@@ -6,13 +6,15 @@ const createGig = async (req, res, next) => {
   if (!req.isSeller)
     return next(createError(403, "Only creators can create a gig!"));
 
-  const newGig = new Gig({
-    userId: req.userId,
-    ...req.body,
-  });
-
   try {
-    
+    const user = await User.findById(req.userId);
+
+    const newGig = new Gig({
+      userId: req.userId,
+      tag: user.tag,
+      ...req.body,
+    });
+
     const savedGig = await newGig.save();
     res.status(201).json(savedGig);
   } catch (err) {

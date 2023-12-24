@@ -56,6 +56,14 @@ const UserSchema = new Schema({
         type: String,
         required: false,
     },
+    tag: {
+        type: String,
+        required: false,
+    },
+    medias: {
+        type:[String],
+        required: false
+    },
     instagram: {
         type: String,
         required: false,

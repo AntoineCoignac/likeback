@@ -1,4 +1,5 @@
 const User = require("../models/user.model.js");
+const Gig = require("../models/gig.model.js");
 const createError = require("../utils/createError.js");
 
 const deleteUser = async (req, res, next) => {
@@ -39,6 +40,9 @@ const updateUser = async (req, res, next) => {
       return next(createError(403, "You can update only your account!"));
     }
 
+    // Sauvegarde l'ancien tag de l'utilisateur
+    const oldTag = user.tag;
+
     // Update the user fields based on the data sent from the frontend
     for (const key in req.body) {
       if (Object.hasOwnProperty.call(req.body, key)) {
@@ -49,7 +53,15 @@ const updateUser = async (req, res, next) => {
       }
     }
 
+    if (req.body.medias && Array.isArray(req.body.medias)) {
+      user.medias = req.body.medias; 
+    }
+
     const updatedUser = await user.save();
+
+    if (oldTag !== updatedUser.tag) {
+      await Gig.updateMany({ userId: updatedUser._id }, { tag: updatedUser.tag });
+    }
 
     res.status(200).json(updatedUser);
   } catch (err) {
