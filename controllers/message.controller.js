@@ -48,7 +48,7 @@ const createMessage = async (req, res, next) => {
                     <td style="background-color: #ffffff; padding: 20px; border: 1px solid #A7A7A7;">
                         <p>Bonjour <span style="font-weight : 500;">${receiver.name}</span>,</p>
                         <p>Vous avez un nouveau message sur Like.</p>
-                        <a href="https://app.like.cr" style="background-color: #D91A3D; color: #ffffff; text-align: center; text-decoration: none; padding: 10px 20px; margin-top: 14px; font-weight: 500px; border-radius: 3px; display: block;">Voir le message</a>
+                        <a href="https://app.like.cr/work/chats" style="background-color: #D91A3D; color: #ffffff; text-align: center; text-decoration: none; padding: 10px 20px; margin-top: 14px; font-weight: 500px; border-radius: 3px; display: block;">Voir le message</a>
                     </td>
                 </tr>
             </table>`

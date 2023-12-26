@@ -96,7 +96,7 @@ const login = async (req, res, next) => {
                     <td style="background-color: #ffffff; padding: 20px; border: 1px solid #A7A7A7;">
                         <p>Bonjour <span style="font-weight : 500;">${info.name}</span>,</p>
                         <p>Quelqu'un vient de se connecter à votre compte. Si ce n'est pas vous, veuillez modifier votre mot de passe.</p>
-                        <a href="https://app.like.cr" style="background-color: #D91A3D; color: #ffffff; text-align: center; text-decoration: none; padding: 10px 20px; margin-top: 14px; font-weight: 500px; border-radius: 3px; display: block;">Modifier le mot de passe</a>
+                        <a href="https://app.like.cr/settings" style="background-color: #D91A3D; color: #ffffff; text-align: center; text-decoration: none; padding: 10px 20px; margin-top: 14px; font-weight: 500px; border-radius: 3px; display: block;">Modifier le mot de passe</a>
                     </td>
                 </tr>
             </table>`
@@ -134,8 +134,47 @@ const logout = async (req, res) => {
     .send("User has been logged out.");
 };
 
+const isLoggedIn = (req, res) => {
+  const isLoggedIn = req.cookies.accessToken ? true : false;
+  
+  res.status(200).json({ isLoggedIn });
+};
+
+const changePassword = async (req, res, next) => {
+  const { oldPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return next(createError(404, "User not found!"));
+    }
+
+    const isCorrect = bcrypt.compareSync(oldPassword, user.password);
+
+    if (!isCorrect) {
+      return res.status(400).json({ error: "Wrong old password!" });
+    }
+
+    if (!isValidPassword(newPassword)) {
+      return res.status(400).json({ error: 'Le nouveau mot de passe ne répond pas aux critères de sécurité.' });
+    }
+
+    const hash = bcrypt.hashSync(newPassword, 5);
+
+    user.password = hash;
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully." });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   register,
   login,
   logout,
+  isLoggedIn,
+  changePassword
 };
