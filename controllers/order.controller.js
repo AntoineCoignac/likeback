@@ -3,7 +3,7 @@ const createError = require("../utils/createError.js");
 const Gig = require("../models/gig.model.js");
 const Stripe = require("stripe");
 const moment = require("moment");
-const User = require("../models/user.model.js");
+const User = require("../models/user.model.js"); 
 
 const intent = async (req, res, next) => {
   try {
